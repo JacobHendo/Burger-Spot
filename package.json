@@ -1,0 +1,25 @@
+{
+  "name": "burger-spot",
+  "version": "1.0.0",
+  "description": "Burger-Stop app",
+  "main": "index.js",
+  "scripts": {
+    "test": "Order Up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobHendo/Burger-Spot.git"
+  },
+  "author": "Jacob Henderson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobHendo/Burger-Spot/issues"
+  },
+  "homepage": "https://github.com/JacobHendo/Burger-Spot#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.16.0"
+  }
+}

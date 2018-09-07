@@ -1,43 +1,35 @@
 var express = require("express");
 
 var router = express.Router();
+var burger = require("../models/burger.js");
 
-// Import the model (burger.js) to use its database functions.
-var cat = require("../models/burger.js");
 
-// Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    cat.all(function(data) {
-      var hbsObject = {
-        cats: data
-      };
-      console.log(hbsObject);
-      res.render("index", hbsObject);
-    });
-  });
-  
-  router.post("/api/burgers", (req, res)=> {
-    burger.create(req.body.name, (result)=> {
-      // Send back the ID of the new quote
-      res.json({ id: result.insertId });
-    });
-  });
-  
-  router.put("/api/burgers/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-  
-  
-    burger.update({
-      devoured: req.body.devoured
-    }, condition, function(result) {
-      if (result.changedRows == 0) {
-        // If no rows were changed, then the ID must not exist, so 404
-        return res.status(404).end();
-      } else {
-        res.status(200).end();
-      }
-    });
-  });
+  res.redirect("/burgers");
+});
 
-  // Export routes for server.js to use.
+router.get("/burgers", function(req, res) {
+  burger.all(function(burgerData) {
+    res.render("index", { burger_data: burgerData });
+  });
+});
+
+router.post("/burgers/create", function(req, res) {
+  burger.create(req.body.burger_name, function(result) {
+    
+    console.log(result);
+    res.redirect("/");
+  });
+});
+
+
+router.put("/burgers/:id", function(req, res) {
+  burger.update(req.params.id, function(result) {
+    
+    console.log(result);
+    
+    res.sendStatus(200);
+  });
+});
+
 module.exports = router;
